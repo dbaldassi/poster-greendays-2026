@@ -139,9 +139,9 @@
 	\begin{thebibliography}{1}							% Simple bibliography with widest label of 1
 	  \itemsep=-0.01em										% Save space between the separation
 	  \setlength{\baselineskip}{0.4em}					% Save space with longer lines
-	  \bibitem{prevWork1} Laszlo Gulyas, Richard Legendi: \emph{Effects of Sample Duration on Network Statistics in Elementary Models of Dynamic Networks}, International Conference on Computational Science, Singapore (2011)
-	  \bibitem{prevWork2} Laszlo Gulyas, Susan Khor, Richard Legendi and George Kampis \emph{Cumulative Properties of Elementary Dynamic Networks}, The International Sunbelt Social Network Conference XXXI (2011)
-	  \bibitem{gulya-kampis1} Gulyas, Laszlo et al.: \emph{Betweenness Centrality Dynamics in Networks of Changing Density}. Presented at the 19th International Symposium on Mathematical Theory of Networks and Systems (MTNS 2010)
+	  % \bibitem{prevWork1} Laszlo Gulyas, Richard Legendi: \emph{Effects of Sample Duration on Network Statistics in Elementary Models of Dynamic Networks}, International Conference on Computational Science, Singapore (2011)
+	  % \bibitem{prevWork2} Laszlo Gulyas, Susan Khor, Richard Legendi and George Kampis \emph{Cumulative Properties of Elementary Dynamic Networks}, The International Sunbelt Social Network Conference XXXI (2011)
+	  % \bibitem{gulya-kampis1} Gulyas, Laszlo et al.: \emph{Betweenness Centrality Dynamics in Networks of Changing Density}. Presented at the 19th International Symposium on Mathematical Theory of Networks and Systems (MTNS 2010)
 	\end{thebibliography}
   }
 
@@ -151,36 +151,62 @@
   % 	This research was partially supported by the Hungarian Government (KMOP-1.1.2-08/1-2008-0002 ) and the European Union's Seventh Framework Programme: DynaNets, FET-Open project no. FET-233847 (\url{http://www.dynanets.org}). The supports are gratefully acknowledged.
   % }
 
-  \headerbox{Heuritics}{name=heuristics,column=1,row=0}{
+  \headerbox{Heuritics based on cgroups}{name=heuristics-cgroups,column=1,row=0}{
 	% \begin{minipage}{\linewidth}
 	\includegraphics[width=\linewidth]{heuristic_reclaim}
-	\includegraphics[width=\linewidth]{retroaction}
+	% \includegraphics[width=\linewidth]{retroaction}
 	% \end{minipage}
   }
 
-  \headerbox{Results}{name=results,span=2,column=1,below=heuristics}{
-
-	\begin{minipage}{\linewidth}
-	  \includegraphics[width=\linewidth]{delta} \\
-	  \includegraphics[width=0.49\linewidth]{res_cgroups}
-	  \includegraphics[width=0.49\linewidth]{res_balloon}
-	\end{minipage}
-
-
-  }
-
-  \headerbox{Results}{name=results2,span=2,column=1,below=results,above=bottom}{
-	\begin{minipage}{\linewidth}
-	  \includegraphics[height=0.27\linewidth]{barplot_vms}
-	\end{minipage}
-  }
-
-  \headerbox{Autres}{name=Autre,column=2,row=0}{
+  \headerbox{Heuritics based on ballooning}{name=heuristics-ballooning,column=2,row=0}{
 	% \begin{minipage}{\linewidth}
-	%\includegraphics[width=0.5\linewidth]{heuristic_reclaim}
-	% \includegraphics[width=0.5\linewidth]{retroaction}
+	% \includegraphics[width=\linewidth]{heuristic_reclaim}
+	\includegraphics[width=\linewidth]{retroaction}
+
+    \begin{itemize}
+      \item Based on PID regulation
+      \item Safety margin of 200~MiB
+      \item + Reactive
+      \item - CPU consumption
+    \end{itemize}
+
 	% \end{minipage}
   }
+
+  \headerbox{Results with cgroups}{name=results-cgroups,span=1,column=1,below=heuristics-cgroups}{
+	\includegraphics[width=\linewidth]{res_cgroups}
+  }
+
+  \headerbox{Results with ballooing}{name=results-ballooning,span=1,column=2,below=heuristics-ballooning}{
+	\includegraphics[width=\linewidth]{res_balloon}
+  }
+
+  \headerbox{Quality of Service (publishing bitrate) is not affected}{name=qos,span=2,column=1,below=results-cgroups}{
+	  \includegraphics[width=\linewidth]{delta}
+  }
+
+  \headerbox{Additional VMs using our heuristics}{name=vm-load,span=2,column=1,below=qos,above=bottom}{
+	\begin{minipage}[h!]{\linewidth}
+      \begin{minipage}[h!]{0.3\linewidth}
+        \begin{itemize}
+          \item 60\% additional VMs with cgroups
+          \item 13\% additional VMs with ballooning
+        \end{itemize}
+      \end{minipage}
+      \begin{minipage}{0.6\linewidth}
+        \begin{flushright}
+          \includegraphics[width=0.9\linewidth]{barplot_vms}
+        \end{flushright}
+      \end{minipage}
+	\end{minipage}
+  }
+
+  % \headerbox{Autres}{name=Autre,column=2,row=0}{
+  %   % \begin{minipage}{\linewidth}
+  %   %\includegraphics[width=0.5\linewidth]{heuristic_reclaim}
+  %   % \includegraphics[width=0.5\linewidth]{retroaction}
+  %   % \end{minipage}
+  % }
 
 \end{poster}
 \end{document}
